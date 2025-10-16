@@ -1,0 +1,44 @@
+{
+  "onBoard": {
+    "welcome": {
+      "1": "Seul on part vite, avec une communauté on part loin",
+      "2": "Bienvenue sur EduApp",
+      "signUp": "S’inscrire",
+      "signIn": "Se connecter"
+    },
+    "title": "Espace d’apprentissage et de partage",
+    "desc": "Conçu pour vous aider à développer vos compétences, nourrir vos idées et évoluer aux côtés d’une communauté passionnée.",
+    "getStarted": "Nous réjoindre",
+    "images_text": {
+      "box1": {
+        "title": "Apprenez de nouvelles compétences",
+        "desc": "Accédez à un large éventail de cours et de tutoriels pour enrichir vos connaissances."
+      },
+      "box2": {
+        "title": "Partagez vos connaissances",
+        "desc": "Créez et partagez votre propre contenu avec la communauté."
+      },
+      "box3": {
+        "title": "Interagissez avec d'autres étudiants",
+        "desc": "Discutez ensemble, partagez vos idées et apprenez ensemble."
+      }
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Se connecter",
+      "para": "Nous sommes ravie de vous voir encore, vous nous avez vraimment manquer!",
+      "haveAccount": "N'avez-vous pas encore un compte? "
+    },
+    "signUp": {
+      "title": "S'Inscrire",
+      "para": "Inscrivez-vous pour découvrir un monde d'apprentissage et de partage.",
+      "haveAccount": "Avez-vous déjà un compte? "
+    },
+    "input": {
+      "name": "Nom complet",
+      "mail": "exemple@gmail.com",
+      "confirm": "Confirmer le mot de passe"
+    }
+  }
+}

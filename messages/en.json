@@ -1,0 +1,44 @@
+{
+  "onBoard": {
+    "welcome": {
+      "1": "Alone we go faster, together we go further!",
+      "2": "Welcome to EduApp",
+      "signUp": "Sign Up",
+      "signIn": "Sign In"
+    },
+    "title": "A space for learning and sharing",
+    "desc": "Designed to help you develop your skills, nurture your ideas, and grow alongside a passionate community.",
+    "getStarted": "Join us",
+    "images_text": {
+      "box1": {
+        "title": "Learn new skills",
+        "desc": "Access a wide range of courses and tutorials to enhance your knowledge."
+      },
+      "box2": {
+        "title": "Share your knowledge",
+        "desc": "Create and share your own content with the community."
+      },
+      "box3": {
+        "title": "Interact with other students",
+        "desc": "Discuss together, share thought & learn together"
+      }
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Sign In",
+      "para": "We are happy to have you back, you really missed us!",
+      "haveAccount": "Don't have an account? "
+    },
+    "signUp": {
+      "title": "Sign Up",
+      "para": "Sign up to discover a world of learning and sharing.",
+      "haveAccount": "Allready have an account? "
+    },
+    "input": {
+      "name": "Full name",
+      "mail": "example@gmail.com",
+      "confirm": "Confirm password"
+    }
+  }
+}
