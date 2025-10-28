@@ -20,7 +20,9 @@ export default function HeaderHome() {
         <div className="hidden md:flex gap-4 items-center mr-4 ">
           <LanguageSwitcher className="flex " />
 
-          <p className="text-[#111] dark:text-white ">{t("1")}</p>
+          <p className="text-[#111] hidden dark:text-white md:block  ">
+            {t("1")}
+          </p>
         </div>
         <button className="h-10 w-10 rounded-full bg-[#edf4fa] flex justify-center items-center ">
           <FaSignalMessenger className="text-[#3832F2] text-xl md:text-2xl " />

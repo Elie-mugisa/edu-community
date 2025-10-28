@@ -1,9 +1,10 @@
 "use client";
+import { createAuth } from "@/action/auth";
 import MyImage from "@/components/image/my_image";
 import MyDivider from "@/components/ui/my_divider";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useState } from "react";
+import { useActionState, useState } from "react";
 
 import {
   MdAlternateEmail,
@@ -12,9 +13,16 @@ import {
   MdVisibilityOff,
 } from "react-icons/md";
 
+const initialState = {
+  email: "",
+  password: "",
+  errors: {},
+} as any;
+
 export default function SignUp() {
   const [isVisiblePass, setIsVisiblePass] = useState(false);
   const [isVisibleConfPass, setIsVisibleConfPass] = useState(false);
+  const [state, action, isPending] = useActionState(createAuth, initialState);
 
   const t = useTranslations("auth");
 
@@ -33,45 +41,98 @@ export default function SignUp() {
           </h1>
           <p className="text-lg text-[#999] ">{t("signUp.para")}</p>
         </div>
-
+        AddMe
         {/* //? Formular */}
         <form
-          action=""
+          action={action}
           className=" w-full px-10 flex flex-col gap-4 lg:mt-[5vh] "
         >
           {/*  NAME */}
-          <div className=" relative flex items-center   rounded-md  w-full">
+          <div className=" relative flex flex-col   rounded-md  w-full">
             <input
               type="text"
+              name="name"
+              defaultValue={state?.name}
               placeholder={`${t("input.name")}`}
-              className="p-3 w-full border border-[#3832F2]/40 outline-none focus:border-[#3832F2] text-[#111] placeholder:text-[#999] rounded-md
-            "
+              className={`p-3 w-full border ${
+                state?.errors != null && state?.errors["name"]
+                  ? "border-red-500"
+                  : "border-[#3832F2]/40"
+              }  outline-none focus:border-[#3832F2] text-[#111] placeholder:text-[#999] rounded-md`}
             />
-          </div>
 
-          {/*  EMAIL */}
-          <div className=" relative flex items-center   rounded-md  w-full">
-            <input
-              type="text"
-              placeholder={`${t("input.mail")}`}
-              className="p-3 pl-14 w-full border border-[#3832F2]/40 outline-none focus:border-[#3832F2] text-[#111] placeholder:text-[#999] rounded-md
-            "
-            />
-            <div className="absolute left-2 flex gap-2 items-center ">
-              <MdAlternateEmail className="text-[#111] text-2xl " />
-              <MyDivider className="h-5 bg-[#111]" />
+            <div className="">
+              {state?.errors &&
+              state?.errors["name"] != null &&
+              state?.errors["name"][0] ? (
+                <p className="text-xs text-red-400 md:text-sm ">
+                  {state?.errors["name"][0]}
+                </p>
+              ) : (
+                <div />
+              )}
+              {state?.errors &&
+              state?.errors["name"] != null &&
+              state?.errors["name"][1] ? (
+                <p className="text-xs text-red-400 md:text-sm ">
+                  {state?.errors["name"][1]}
+                </p>
+              ) : (
+                <div />
+              )}
             </div>
           </div>
 
+          {/*  EMAIL */}
+          <div className=" relative flex flex-col   rounded-md  w-full">
+            <input
+              type="text"
+              name="email"
+              defaultValue={state?.email}
+              placeholder={`${t("input.mail")}`}
+              className={`p-3 w-full pl-14 border ${
+                state?.errors != null && state?.errors["email"]
+                  ? "border-red-500"
+                  : "border-[#3832F2]/40"
+              }  outline-none focus:border-[#3832F2] text-[#111] placeholder:text-[#999] rounded-md`}
+            />
+            <div className="absolute left-2 top-2.5 flex gap-2 items-center ">
+              <MdAlternateEmail className="text-[#111] text-2xl " />
+              <MyDivider className="h-5 bg-[#111]" />
+            </div>
+
+            <div className="">
+              {state?.errors &&
+                state?.errors["email"] != null &&
+                state?.errors["email"] && (
+                  <p className="text-xs text-red-400 md:text-sm ">
+                    {state?.errors["email"]}
+                  </p>
+                )}
+            </div>
+          </div>
+
+          <input
+            type="text"
+            className="hidden"
+            name="role"
+            defaultValue={"regular"}
+          />
+
           {/*  PASS */}
-          <div className=" relative flex items-center   rounded-md  w-full">
+          <div className=" relative flex   flex-col rounded-md  w-full">
             <input
               type={isVisiblePass ? "text" : "password"}
               placeholder="*** *** "
-              className="p-3 pl-14 w-full border border-[#3832F2]/40 outline-none focus:border-[#3832F2] text-[#111] placeholder:text-[#999] rounded-md
-            "
+              name="password"
+              defaultValue={state?.password}
+              className={`p-3 w-full pl-14 border ${
+                state?.errors != null && state?.errors["password"]
+                  ? "border-red-500"
+                  : "border-[#3832F2]/40"
+              }  outline-none focus:border-[#3832F2] text-[#111] placeholder:text-[#999] rounded-md`}
             />
-            <div className="absolute left-2 flex gap-2 items-center ">
+            <div className="absolute left-2 top-2.5 flex gap-2 items-center ">
               <MdOutlinePassword className="text-[#111] text-2xl " />
               <MyDivider className="h-5 bg-[#111]" />
             </div>
@@ -87,17 +148,31 @@ export default function SignUp() {
                 className="absolute top-2.5 right-2 text-2xl cursor-pointer "
               />
             )}
+
+            {state?.errors &&
+              state?.errors["password"] != null &&
+              state?.errors["password"].length > 0 &&
+              state?.errors["password"].map((index: any, item: any) => (
+                <li
+                  key={index}
+                  className="text-xs ml-3 text-red-400 md:text-sm "
+                >
+                  {state?.errors["password"][item]}
+                </li>
+              ))}
           </div>
 
           {/* CONFIRM PASS */}
-          <div className=" relative flex items-center   rounded-md  w-full">
+          <div className=" relative flex  flex-col rounded-md  w-full">
             <input
               type={isVisibleConfPass ? "text" : "password"}
+              name="confirmPassword"
+              defaultValue={state?.confirmPassword}
               placeholder={`${t("input.confirm")}`}
               className="p-3 pl-14 w-full border border-[#3832F2]/40 outline-none focus:border-[#3832F2] text-[#111] placeholder:text-[#999] rounded-md
             "
             />
-            <div className="absolute left-2 flex gap-2 items-center ">
+            <div className="absolute left-2 top-2.5 flex gap-2 items-center ">
               <MdOutlinePassword className="text-[#111] text-2xl " />
               <MyDivider className="h-5 bg-[#111]" />
             </div>
@@ -113,12 +188,27 @@ export default function SignUp() {
                 className="absolute top-2.5 right-2 text-2xl cursor-pointer "
               />
             )}
+
+            {state?.errors &&
+              state?.errors["confirmPassword"] != null &&
+              state?.errors["confirmPassword"].length > 0 && (
+                <p className="text-xs text-red-400 md:text-sm ">
+                  {state?.errors["confirmPassword"][0]}
+                </p>
+              )}
           </div>
 
           {/* //? BTN */}
           <div className="py-8 w-full flex flex-col gap-4 items-end justify-center ">
             <button className="bg-gradient-to-r py-1.5  from-[#3832F2]  to-[#c648f8] w-full font-semibold transition-all duration-300 text-white  hover:opacity-80 rounded-full md:px-14 lg:py-2 ">
-              {t("signUp.title")}
+              {isPending ? (
+                <div className="flex justify-center gap-2">
+                  {/* <span>{t("load")}</span> */}
+                  <span className="animate-spin rounded-full h-5 w-5 border-b-3 border-white " />
+                </div>
+              ) : (
+                `${t("signUp.title")}`
+              )}
             </button>
             <div>
               {t("signUp.haveAccount")}
