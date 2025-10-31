@@ -135,9 +135,11 @@ export default function HomePage() {
                   console.log("DATA RES ::: ", res);
                   notify();
                   setSaving(false);
+                  setModalAdd(false);
                 } catch (error) {
                   console.log("The error form client ::: ", error);
                   setSaving(false);
+                  setModalAdd(false);
                 }
               }}
               className="flex flex-col gap-1"

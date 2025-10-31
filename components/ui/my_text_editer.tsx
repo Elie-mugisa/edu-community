@@ -50,7 +50,8 @@ export default function MyTextEditor({ data, onChange }: Props) {
                     const formData = new FormData();
                     formData.append("image", file);
                     const res = await fetch(
-                      `${process.env.NEXT_PUBLIC_URL}/api/upload`,
+                      // `${process.env.NEXT_PUBLIC_URL}/api/upload`,
+                      "https://edu-community-puce.vercel.app/api/upload",
                       {
                         method: "POST",
                         body: formData,

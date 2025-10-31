@@ -16,7 +16,7 @@ export async function creatingPost({ title, content }: PostType) {
     });
 
     const dataRes = await res?.json();
-    console.log(dataRes, " ☑️☑️☑️ :: POST CREATE  SERVICE --- ");
+    console.log(dataRes, " ☑️☑️☑️ :: POST CREATED  SERVICE --- ");
 
     return dataRes;
   } catch (error) {
