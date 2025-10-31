@@ -20,6 +20,8 @@ import { IoLibrary, IoPerson } from "react-icons/io5";
 import MyTextEditor from "@/components/ui/my_text_editer";
 import { creatingPost } from "@/services/post_service";
 import { PostType } from "@/types/post_type";
+import { GiNewspaper } from "react-icons/gi";
+import { toast, ToastContainer } from "react-toastify";
 
 const initialState = {
   title: "",
@@ -39,10 +41,12 @@ export default function HomePage() {
   const [saving, setSaving] = useState(false);
 
   console.log("DATA --> ", data);
+  const notify = () => toast.success("Poster avec succee!!");
 
   return (
     <div className="min-h-screen w-full relative flex justify-center items-start  ">
       {/* <div className="hidden  md:w-[30vw] md:block " /> */}
+      <ToastContainer />
 
       {/* // ? MAIN SECTION */}
       <div className="flex flex-col pt-[10vh] justify-start gap-2 px-2 py-8 md:pt-[10vh] lg:px-[10vw] w-full md:w-[75vw] lg:w-[60vw]  ">
@@ -129,7 +133,7 @@ export default function HomePage() {
                   const res = await creatingPost(dataF);
                   console.log("DATA FORM ::: ", dataF);
                   console.log("DATA RES ::: ", res);
-
+                  notify();
                   setSaving(false);
                 } catch (error) {
                   console.log("The error form client ::: ", error);
@@ -202,9 +206,9 @@ export default function HomePage() {
           </div>
           <div className="h-full  pt-3 flex flex-col justify-center items-center ">
             <span className="">
-              <IoLibrary className="text-4xl text-[#666]" />
+              <GiNewspaper className="text-4xl text-[#666]" />
             </span>
-            <p className="text-xs text-[#666] ">Library</p>
+            <p className="text-xs text-[#666] ">News</p>
           </div>
           <div className="h-full  pt-3 flex flex-col justify-center items-center ">
             <span className="">
@@ -223,10 +227,10 @@ export default function HomePage() {
       {/* //? BTN ADD */}
       <div
         onClick={() => setModalAdd(true)}
-        className="bg-linear-to-br  from-[#c648f8] to-[#3832F2] h-[8vh] w-[8vh] rounded-full flex justify-center items-center flex-col cursor-pointer fixed bottom-[5vh] right-[4vw] transition-all duration-300 text-white hover:scale-110 "
+        className="bg-linear-to-br  from-[#c648f8] to-[#3832F2] h-[8vh] w-[8vh] rounded-full flex justify-center items-center flex-col cursor-pointer fixed bottom-[10vh] lg:bottom-[5vh] right-[4vw] transition-all duration-300 text-white hover:scale-110 "
       >
         <RiQuillPenAiFill className="text-white text-2xl md:text-3xl" />
-        <p>Ecrire</p>
+        <p className="text-sm md:text-base">Ecrire</p>
       </div>
     </div>
   );
@@ -245,17 +249,25 @@ function SearchSection() {
         </div>
       </form>
       <div className="flex  gap-4 md:gap-6 items-center">
-        <div className="flex flex-[1] justify-center gap-2 items-center transition-all duration-200 p-2 rounded-md cursor-pointer hover:bg-slate-100 ">
-          <PiBookBookmarkFill className="text-[#3832F2] text-xl md:text-2xl" />
-          <p className="text-lg md:text-xl">Check Books</p>
+        <div className="flex flex-[1] justify-center md:gap-2 items-center transition-all duration-200 p-2 rounded-md cursor-pointer hover:bg-slate-100 ">
+          <div className="h-10 w-12  flex justify-center items-center">
+            <PiBookBookmarkFill className="text-[#3832F2] text-3xl " />
+          </div>
+          <p className="text-sm md:text-xl">Check Books</p>
         </div>
         <div className="flex flex-[1] justify-center gap-2 items-center transition-all duration-200 p-2 rounded-md cursor-pointer hover:bg-slate-100 ">
-          <LiaPhotoVideoSolid className="text-[#327ff2] text-xl md:text-2xl" />
-          <p className="text-lg md:text-xl">Watch Videos</p>
+          <div className="h-10 w-12  flex justify-center items-center">
+            <LiaPhotoVideoSolid className="text-[#327ff2] text-3xl " />
+          </div>
+
+          <p className="text-sm md:text-xl">Watch Videos</p>
         </div>
         <div className="flex flex-[1] justify-center gap-2 items-center transition-all duration-200 p-2 rounded-md cursor-pointer hover:bg-slate-100 ">
-          <AiFillPicture className="text-pink-500 text-xl md:text-2xl" />
-          <p className="text-lg md:text-xl">See Pictures</p>
+          <div className="h-10 w-12  flex justify-center items-center">
+            <AiFillPicture className="text-pink-500 text-3xl" />
+          </div>
+
+          <p className="text-sm md:text-xl">See Pictures</p>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+"use client";
+
 import MyImage from "@/components/image/my_image";
 import LanguageSwitcher from "@/components/langSwitcher/lang_switcher";
 import MyDivider from "@/components/ui/my_divider";
@@ -6,8 +8,10 @@ import Link from "next/link";
 
 import { RiLightbulbFlashFill } from "react-icons/ri";
 import { PiStudentThin } from "react-icons/pi";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoLibrary } from "react-icons/io5";
-import { GiNewspaper } from "react-icons/gi";
+
+import { useState } from "react";
 
 export default function Home() {
   const t = useTranslations("onBoard.welcome");
@@ -82,10 +86,11 @@ export default function Home() {
 
 function Header_() {
   const t = useTranslations("onBoard.welcome");
+  const [showDrop, setShowDrop] = useState(false);
 
   return (
     <div className=" w-full flex gap-4 justify-between fixed top-0 left-0 bg-white/60 backdrop-blur-xs dark:bg-sky-950 items-center py-4 px-4 lg:px-[5vw]">
-      <div className="flex gap-4 items-center ">
+      <div className=" gap-4 items-center hidden md:flex ">
         <LanguageSwitcher className="hidden md:flex " />
         <p className="text-[#111] dark:text-white ">{t("1")}</p>
         <MyDivider className="h-4" />
@@ -105,6 +110,29 @@ function Header_() {
         >
           {t("signUp")}
         </Link>
+      </div>
+
+      <div
+        onClick={() => setShowDrop(!showDrop)}
+        className="w-[5vw] py-2  rounded-full mr-4 lg:hidden
+       "
+      >
+        <BsThreeDotsVertical className="text-[#c648f8] text-3xl " />
+      </div>
+      {/* //? responsive mobile */}
+      <div
+        className={`flex justify-center items-center absolute right-[5vw] top-[10vh] py-2 w-[70vw] shadow-2xl shadow-sky-500/20 rounded-md transition-all duration-300 text-white ${
+          showDrop
+            ? " translate-y-0 opacity-100  "
+            : " -translate-y-80 opacity-0 "
+        }  `}
+      >
+        <div className=" p-2 items-start flex flex-col gap-2 ">
+          <LanguageSwitcher className="flex " />
+          <p className="text-[#111] dark:text-white ">{t("1")}</p>
+          <MyDivider className="h-[1px] w-[10vw] " />
+          <p className="font-bold text-black ">EduApp</p>
+        </div>
       </div>
     </div>
   );
